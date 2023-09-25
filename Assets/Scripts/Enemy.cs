@@ -5,12 +5,25 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;
-
     private Player _player;
+    private BoxCollider2D _boxCollider;
+    private Animator _animator;
 
     void Start()
     {
         _player = GameObject.Find("Player").GetComponent<Player>();
+        _boxCollider = GetComponent<BoxCollider2D>();
+
+        if(_player == null)
+        {
+            Debug.LogError("PLAYER IS NULL.");
+        }
+
+        _animator = GetComponent<Animator>();
+        if(_animator == null)
+        {
+            Debug.LogError("ANIMATOR IS NULL.");
+        }
     }
     void Update()
     {
@@ -26,7 +39,10 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddScore(10);
             }
-            Destroy(gameObject);
+            _animator.SetTrigger("OnEnemyDeath");
+            _movementSpeed = 0;
+            _boxCollider.enabled = false;
+            Destroy(gameObject,2.8f);
         }
         
         if(other.gameObject.tag == "Player")
@@ -36,7 +52,10 @@ public class Enemy : MonoBehaviour
             {
                 other.transform.GetComponent<Player>().Damage();
             }
-            Destroy(gameObject);
+            _animator.SetTrigger("OnEnemyDeath");
+            _movementSpeed = 0;
+            _boxCollider.enabled = false;
+            Destroy(gameObject,2.8f);
         }
     }
 

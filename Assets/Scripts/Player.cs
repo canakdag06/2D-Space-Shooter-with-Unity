@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float _speed, _speedMultiplier;
     private float _minX, _maxX, _minY, _maxY;
-    [SerializeField] private GameObject _laserPrefab, _tripleShot, _shield;
+    [SerializeField] private GameObject _laserPrefab, _tripleShot, _shield, _rightEngine, _leftEngine;
 
     private float _nextShot = -1f;  // COOLDOWN
     [SerializeField] private float _cooldown = 0.5f;
@@ -98,6 +98,17 @@ public class Player : MonoBehaviour
 
 
         _lives--;
+
+        if(_lives == 2)
+        {
+            _rightEngine.SetActive(true);
+        }
+        else if(_lives == 1)
+        {
+            _leftEngine.SetActive(true);
+        }
+
+
         _uiManager.UpdateLives(_lives);
 
         // check if dead
