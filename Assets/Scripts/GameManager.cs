@@ -6,13 +6,31 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool _isGameOver;
+    [SerializeField] private GameObject pauseMenu;
 
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R) && _isGameOver)
+        if (_isGameOver)
         {
-            SceneManager.LoadScene(1); // Scene: Game
+            if (Input.GetKeyDown(KeyCode.R) && _isGameOver)
+            {
+                SceneManager.LoadScene(1); // Scene: Game
+            }
         }
+        else
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
+
+
     }
 
     public void GameOver()
@@ -20,5 +38,15 @@ public class GameManager : MonoBehaviour
         _isGameOver = true;
     }
 
+    public void ResumeGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("Main_Menu");
+    }
 
 }

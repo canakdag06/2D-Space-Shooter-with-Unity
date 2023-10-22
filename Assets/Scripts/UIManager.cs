@@ -62,4 +62,16 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }   
     }
+
+    public void Resume()
+    {
+        _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+        _gameManager.ResumeGame();
+    }
+
+    public void MainMenu()
+    {
+        _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+        _gameManager.BackToMainMenu();
+    }
 }

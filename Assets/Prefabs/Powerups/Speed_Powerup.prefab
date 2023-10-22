@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 3
   _id: 1
+  _prefabSound: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
 --- !u!95 &2999205079442646230
 Animator:
   serializedVersion: 5
